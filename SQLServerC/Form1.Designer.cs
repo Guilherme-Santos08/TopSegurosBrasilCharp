@@ -35,6 +35,7 @@
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnAdicionar = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
+            this.btnExcluir = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -96,7 +97,7 @@
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(98, 474);
+            this.btnAlterar.Location = new System.Drawing.Point(109, 474);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(80, 35);
             this.btnAlterar.TabIndex = 4;
@@ -104,11 +105,22 @@
             this.btnAlterar.UseVisualStyleBackColor = true;
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
+            // btnExcluir
+            // 
+            this.btnExcluir.Location = new System.Drawing.Point(207, 474);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(80, 35);
+            this.btnExcluir.TabIndex = 5;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            // 
             // Sinistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 534);
+            this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.btnAdicionar);
             this.Controls.Add(this.txtBuscar);
@@ -117,7 +129,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Sinistro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Gerenciar Sinistro";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -136,6 +148,7 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Button btnAdicionar;
         private System.Windows.Forms.Button btnAlterar;
+        private System.Windows.Forms.Button btnExcluir;
     }
 }
 

@@ -19,14 +19,52 @@ namespace SQLServerC
         {
             InitializeComponent();
             this.id = id;
+            toolStripStatusLabel1.Text = "Conectando...";
+            btnSalvar.Visible = true;
+            btnExcluir.Visible = false;
 
             if (this.id > 0)
             {
-                GetVeiculo(id);
+                GetSinistro(id);
+                toolStripStatusLabel1.Text = "Pronto";
+            } else
+            {
+                toolStripStatusLabel1.Text = "Pronto";
             }
         }
 
-        private void GetVeiculo(int id)
+        public FrmSinistroAdicionar(int id, bool excluir)
+        {
+            InitializeComponent();
+            toolStripStatusLabel1.Text = "Conectando...";
+
+            this.id = id;
+
+            if (excluir)
+            {
+                if (this.id > 0)
+                {
+                    toolStripStatusLabel1.Text = "Pronto";
+                    GetSinistro(id);
+                    TravarControles();
+                    btnSalvar.Visible = false;
+                    btnExcluir.Visible = true;
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void TravarControles()
+        {
+            txtDataSinistro.Enabled = false;
+            txtDesc.Enabled = false;
+            txtVeiculoId.Enabled = false;
+        }
+
+        private void GetSinistro(int id)
         {
             try
             {
@@ -61,11 +99,11 @@ namespace SQLServerC
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            SalvarVeiculo();
+            SalvarSinistro();
             this.Close();
         }
 
-        private void SalvarVeiculo()
+        private void SalvarSinistro()
         {
             try
             {
@@ -102,6 +140,49 @@ namespace SQLServerC
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            DialogResult resp = MessageBox.Show("Deseja excluir: ", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (resp == DialogResult.Yes)
+            {
+                ExcluirSinistro();
+                this.Close();
+            }
+        }
+
+        private void ExcluirSinistro()
+        {
+            toolStripStatusLabel1.Text = "Conectando...";
+            statusStrip1.Refresh();
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conn.StrCon))
+                {
+                    cn.Open();
+
+                    var sql = "Delete from Sinistro Where Id=" + id;
+
+                    using (SqlCommand cmd = new SqlCommand(sql, cn))
+                    {
+                        toolStripStatusLabel1.Text = "Excluindo sinistro...";
+                        statusStrip1.Refresh();
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    toolStripStatusLabel1.Text = "Pronto";
+                    statusStrip1.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = "Falha...";
+                statusStrip1.Refresh();
+
+                MessageBox.Show("Não foi possivel excluir os dados!\n\n" + ex.Message);
+            }
         }
     }
 }

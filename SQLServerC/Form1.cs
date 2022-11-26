@@ -69,5 +69,12 @@ namespace SQLServerC
             FrmSinistroAdicionar frm = new FrmSinistroAdicionar(id);
             frm.ShowDialog();
         }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            var id = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value);
+            FrmSinistroAdicionar frm = new FrmSinistroAdicionar(id, true);
+            frm.ShowDialog();
+        }
     }
 }
