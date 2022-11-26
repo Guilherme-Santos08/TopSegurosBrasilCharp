@@ -22,6 +22,7 @@ namespace SQLServerC
         {
             toolStripStatusLabel1.Text = "Conectando, aguarde";
             statusStrip1.Refresh();
+            txtBuscar.Text = "";
 
             try
             {
@@ -29,10 +30,10 @@ namespace SQLServerC
                 {
                     cn.Open();
 
-                    var sqlQuery = "SELECT * FROM Sinistro Where VeiculoId = " + txtBuscar.Text + "";
+                    var sqlQuery = "SELECT * FROM Sinistro";
                     using (SqlDataAdapter da = new SqlDataAdapter(sqlQuery, cn))
                     {
-                        using(DataTable dt = new DataTable())
+                        using (DataTable dt = new DataTable())
                         {
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
@@ -41,7 +42,8 @@ namespace SQLServerC
                     toolStripStatusLabel1.Text = "Pronto!";
                     statusStrip1.Refresh();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 toolStripStatusLabel1.Text = "Falha!";
                 statusStrip1.Refresh();
@@ -53,6 +55,12 @@ namespace SQLServerC
         private void Form1_Load(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "";
+        }
+
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            FrmSinistroAdicionar frm = new FrmSinistroAdicionar();
+            frm.ShowDialog();
         }
     }
 }
