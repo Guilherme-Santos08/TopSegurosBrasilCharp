@@ -149,6 +149,8 @@
             this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDataSinistro);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmSinistroAdicionar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adicionar Sinistro";

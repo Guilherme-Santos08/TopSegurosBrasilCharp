@@ -76,5 +76,10 @@ namespace SQLServerC
             FrmSinistroAdicionar frm = new FrmSinistroAdicionar(id, true);
             frm.ShowDialog();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
